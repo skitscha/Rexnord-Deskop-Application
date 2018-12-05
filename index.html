@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Rexnord</title>
+  </head>
+  <body>
+  <script src='renderer.js'></script>
+  <script>
+
+      ipcRenderer.on('read-dir', (event,dir, files) => {
+          files.forEach(f => {
+             directory=dir;
+              document.getElementById('display-files').innerHTML +=
+                  `<li id=${f} ondblclick="openFile(this.id)"><i class="fa fa-file"></i> ${f}</li>`
+          })
+      })
+
+  </script>
+  <div id='display-files'>
+    Files:
+  </div>
+  </body>
+</html>
