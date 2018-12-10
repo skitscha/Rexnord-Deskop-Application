@@ -2,6 +2,8 @@
 const electron = require('electron')
 const {app, BrowserWindow,Menu,ipcMain} = require('electron')
 const menuTemplate=require('./menu/menu.js').template
+const fs = require('fs')
+const { dialog } = require('electron')
 var mainWindow=null;
 var editWindow=null;
 var usbWindow=null;
@@ -37,6 +39,21 @@ ipcMain.on('new-edit-window', function(event, data) {
 });
 ipcMain.on('form-submission', function(event, data) {
   console.log(data);
+});
+ipcMain.on('createHashKey', function(event, path) {
+    var milliseconds = Math.floor((new Date).getTime()/1000);
+    var hash=((milliseconds*2)/3);
+    var tuple="("+milliseconds+","+hash+")";
+    if(!fs.existsSync(path+"Hash.key")) {
+        fs.writeFile((path + "/Hash.key"), tuple, (err) => {
+            if (err) {
+                dialog.showErrorBox("Error","An error ocurred creating the file " + err.message)
+            }
+        })
+    }
+    else{
+        dialog.showErrorBox("Error","There already is a hash key on the flashdrive")
+    }
 });
 app.on('ready', createWindow)
 // Quit when all windows are closed.

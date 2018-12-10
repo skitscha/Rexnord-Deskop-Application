@@ -20,6 +20,7 @@
     "electron": "^3.0.7"
   },
   "dependencies": {
-    "drivelist": "^6.4.3"
+    "drivelist": "^6.4.3",
+    "jquery": "^3.3.1"
   }
 }

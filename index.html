@@ -3,17 +3,23 @@
   <head>
     <meta charset="UTF-8">
     <title>Rexnord</title>
+    <link rel="stylesheet" href="index.css"/>
   </head>
   <body>
   <script src='renderer.js'></script>
-  <script>
+  <div id="hashButton">
 
+  </div>
+  <script>
+      var $ = require('jQuery');
       ipcRenderer.on('read-dir', (event,dir, files) => {
+          $("ul").empty();
           files.forEach(f => {
              directory=dir;
               document.getElementById('display-files').innerHTML +=
                   `<li id=${f} ondblclick="openFile(this.id)"><i class="fa fa-file"></i> ${f}</li>`
           })
+          createButton()
       })
 
   </script>
