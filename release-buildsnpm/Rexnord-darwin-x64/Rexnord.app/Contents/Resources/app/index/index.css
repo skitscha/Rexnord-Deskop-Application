@@ -1,0 +1,52 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    padding: 10px 0px;
+    background-color: #fbfbfb;
+    box-shadow: 0px 3px 9px 0px rgba(191, 191, 191, 0.8);
+}
+
+#logo {
+    margin: auto;
+    display: block;
+}
+
+#display-files {
+    display: flex;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    padding-top:15px;
+}
+
+.file {
+    padding: 15px;
+    text-align: center;
+}
+
+.file-image {
+    width: 80px;
+}
+
+.file-name {
+    padding: 0;
+    margin: 0;
+    margin-left: 24px;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: arial;
+}
+
+.hash-button {
+    display:block;
+    margin: 15px auto;
+    padding: 5px 10px;
+    background-color: #65C21B;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+}
