@@ -8,8 +8,8 @@ var mainWindow=null;
 var editWindow=null;
 var usbWindow=null;
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 600,icon: __dirname + '/Rexnord.ico',backgroundColor: '#2e2c29'})
-  mainWindow.loadFile('index.html')
+  mainWindow = new BrowserWindow({width: 800, height: 600,icon: __dirname + '/Rexnord.ico'})
+  mainWindow.loadFile('./index/index.html')
    mainWindow.webContents.openDevTools()
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -50,7 +50,12 @@ ipcMain.on('createHashKey', function(event, path) {
                 dialog.showErrorBox("Error","An error ocurred creating the file " + err.message)
             }
         })
+        var files = fs.readdirSync(path)
+        files = files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item))
+
+        mainWindow.webContents.send('read-dir',path,files);
     }
+
     else{
         dialog.showErrorBox("Error","There already is a hash key on the flashdrive")
     }
