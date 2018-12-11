@@ -3,14 +3,15 @@ const electron = require('electron')
 const {app, BrowserWindow,Menu,ipcMain} = require('electron')
 const menuTemplate=require('./menu/menu.js').template
 const fs = require('fs')
+const shell = require('shelljs')
 const { dialog } = require('electron')
 var mainWindow=null;
 var editWindow=null;
 var usbWindow=null;
+var filepath=null;
 function createWindow () {
   mainWindow = new BrowserWindow({width: 800, height: 600,icon: __dirname + '/Rexnord.ico'})
   mainWindow.loadFile('./index/index.html')
-   mainWindow.webContents.openDevTools()
   mainWindow.on('closed', function () {
     mainWindow = null
   })
@@ -18,9 +19,9 @@ function createWindow () {
     Menu.setApplicationMenu(menu);
 }
 function createEditWindow () {
-    usbWindow = new BrowserWindow({width: 433, height: 300,icon: __dirname + '/Rexnord.ico'})
-    usbWindow.loadFile('edit.html')
-    usbWindow.on('closed', function () {
+    editWindow = new BrowserWindow({width: 433, height: 300,icon: __dirname + '/Rexnord.ico'})
+    editWindow.loadFile('./edit/edit.html')
+    editWindow.on('closed', function () {
         editWindow = null
     })
 
@@ -34,11 +35,35 @@ function createUSBWindow () {
     })
 }
 ipcMain.on('new-edit-window', function(event, data) {
-  console.log(data);
   createEditWindow();
 });
-ipcMain.on('form-submission', function(event, data) {
-  console.log(data);
+ipcMain.on('file-path', function(event, data) {
+    filepath=data;
+});
+ipcMain.on('form-submission', function(event, json) {
+    console.log(filepath)
+    shell
+        .echo('Company:'+json.cName+'\n'+
+            'Location:'+json.location+'\n'+
+            'Chain Style:'+json.chainStyle+'\n'+
+            'Chain Width:'+json.chainWidth+'\n'+
+            'Chain Material:'+json.chainMaterial+'\n'+
+            'Chain Length:'+json.chainLength+'\n'+
+            'Product Information:'+json.productInformation+'\n'+
+            'Diameter of drive sprocket:'+json.sprocketDiam+'\n'+
+            'Number of teeth on Sprocket:'+json.sprocketNum+'\n'+
+            'Product Weight:'+json.productWeight+'\n'+
+            'Wearstrip Material:'+json.wearstripMaterial+'\n'+
+            'Ambient/Chain temperature:'+json.chainTemp+'\n'+
+            '% of time accumulation occurs (% slip):'+json.slip+'\n'+
+            'Length of conveyor accumulation occurs:'+json.conveyorLength+'\n'+
+            'Number of starts and stops per hour:'+json.numStarts+'\n'+
+            'Lubrication:'+json.lubrication+'\n'+
+            'Speed (FPM or MPM): :'+json.mSpeed+'\n'+
+            'The product number of the bearing:'+json.bearingPNum+'\n'+
+            'Environment:'+json.environment+'')
+        .cat(filepath)
+        .to(filepath)
 });
 ipcMain.on('createHashKey', function(event, path) {
     var milliseconds = Math.floor((new Date).getTime()/1000);

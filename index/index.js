@@ -5,7 +5,8 @@ const $ = require('jQuery');
 var directory;
 function openFile(path) {
     path=directory+"/"+path;
-    ipcRenderer.send("new-edit-window",path);
+    ipcRenderer.send("new-edit-window");
+    ipcRenderer.send("file-pat",path);
 }
 function createButton(){
     if(!fs.existsSync(directory+"/Hash.key")) {
@@ -28,9 +29,16 @@ ipcRenderer.on('read-dir', (event,dir, files) => {
     files.forEach(f => {
         directory = dir;
         const extension = f.split('.')[1];
-        if(extension=='csv'||extension=='key') {
+        if(extension=='csv') {
             listHTML +=
                 '<div class="file" id="' + f + '" ondblclick="openFile(this.id)">' +
+                '<img src="file-' + extension + '.png" alt="" class="file-image">' +
+                '<h2 class="file-name">' + f + '</h2>' +
+                '</div>'
+        }
+        else if(extension=='key'){
+            listHTML +=
+                '<div class="file" id="' + f + '">' +
                 '<img src="file-' + extension + '.png" alt="" class="file-image">' +
                 '<h2 class="file-name">' + f + '</h2>' +
                 '</div>'

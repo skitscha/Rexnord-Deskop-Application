@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Metadata</title>
+</head>
+<body>
+<script src='edit.js'></script>
+<form action="#" id="ipcForm1" onSubmit="sendForm(event)">
+    Company: <input type="text" name="cName"><br>
+    Location: <input type="text" name="location"><br>
+    Chain Style: <input type="text" name="chainStyle"><br>
+    Chain Width: <input type="text" name="chainWidth"><br>
+    Chain Material: <input type="text" name="chainMaterial"><br>
+    Chain Length: <input type="text" name="chainLength"><br>
+    Drive Configuration:
+    <select name="driveConfig">
+        <option value="Uni-Directional">Uni-Directional</option>
+        <option value="Bi-Directional, End-Drive">Bi-Directional, End-Drive</option>
+        <option value="Bi-Directional, End-Drive">Bi-Directional, Bottom Drive</option>
+    </select>
+    <br>
+    <textarea name="productInformation" rows="5" cols="30"></textarea><br>
+    Diameter of drive Sprocket: <input type="text" name="sprocketDiam"><br>
+    Number of teeth on Sprocket: <input type="text" name="sprocketNum"><br>
+    Product Weight: <input type="text" name="productWeight"><br>
+    Orientation of Sensor:
+    <select name="oSensor">
+        <option value="Horizontal">Horizontal</option>
+        <option value="Vertical">Vertical</option>
+    </select>
+    <br>
+    Wearstrip material: <input type="text" name="wearstripMaterial"><br>
+    Ambient/Chain temperature: <input type="text" name="chainTemp"><br>
+    % of time accumulation occurs (% slip): <input type="text" name="slip"><br>
+    Length of conveyor accumulation occurs: <input type="text" name="conveyorLength"><br>
+    Number of starts and stops per hour: <input type="text" name="numStarts"><br>
+    Lubrication: <input type="text" name="lubrication"><br>
+    Speed (FPM or MPM): <input type="text" name="mSpeed"><br>
+    The product number of the bearing: <input type="text" name="bearingPNum"><br>
+    Environment:
+    <select name="environment">
+        <option value="Abrasive">Abrasive</option>
+        <option value="Chemicals">Chemicals</option>
+        <option value="Bacteria">Bacteria</option>
+    </select>
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

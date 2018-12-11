@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "drivelist": "^6.4.3",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "shelljs": "^0.8.3"
   }
 }
